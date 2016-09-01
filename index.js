@@ -34,7 +34,8 @@ export default class Pusher extends Component {
   }
 
   unbindPusherEvent(channel, event) {
-    this._channel.unbind(event, this.props.onUpdate);
+    const _channel = Pusher.pusherClient.channels.find(channel);
+    _channel.unbind(event, this.props.onUpdate);
     Pusher.channels[channel]--;
 
     if (Pusher.channels[channel] <= 0) {
